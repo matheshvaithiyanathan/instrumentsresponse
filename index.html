@@ -6,80 +6,131 @@
     <title>Instrument Response | Professional Research Software Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        
         html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
+<body class="bg-[#fcfcfd] text-slate-900 selection:bg-sky-100 selection:text-sky-900">
+
+    <!-- Subtle Grid Background Decor -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] z-0" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 30px 30px;"></div>
 
     <!-- Navigation -->
-    <nav class="p-6 max-w-6xl mx-auto flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <img src="icon.png" alt="Instrument Response Icon" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
-            <h1 class="text-2xl font-black tracking-tight uppercase">
-                <span class="text-sky-400">Instruments</span><span class="text-slate-800">Response</span>
-            </h1>
-        </div>
-        <div class="space-x-6 hidden md:block text-xs font-bold uppercase tracking-widest">
-            <a href="#philosophy" class="hover:text-sky-500 transition">Philosophy</a>
-            <a href="#how-it-works" class="hover:text-sky-500 transition">Process</a>
-            <a href="#contact" class="bg-sky-500 text-white px-6 py-2.5 rounded-full hover:bg-sky-600 transition shadow-md">Contact Us</a>
+    <nav class="sticky top-0 z-50 px-6 py-4 glass-light border-b border-slate-100">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Text-only Logo Group -->
+            <div class="group cursor-default">
+                <h1 class="text-xl font-extrabold tracking-tighter uppercase">
+                    <span class="text-sky-400">Instruments</span><span class="text-slate-800">Response</span>
+                </h1>
+            </div>
+            <div class="space-x-8 hidden md:flex items-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                <a href="#foundations" class="hover:text-sky-500 transition">Foundations</a>
+                <a href="#how-it-works" class="hover:text-sky-500 transition">Process</a>
+                <a href="#contact" class="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-sky-500 transition shadow-lg shadow-sky-500/10">Get in Touch</a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="py-24 px-6 max-w-5xl mx-auto text-center">
-        <span class="bg-sky-50 text-sky-600 border border-sky-100 px-4 py-1.5 rounded-full text-[10px] font-black tracking-[0.2em] uppercase mb-6 inline-block">Professional Research Services</span>
-        <h2 class="text-5xl md:text-7xl font-black mb-8 leading-tight tracking-tight text-slate-900">Don't let your vision be limited by <span class="text-sky-500">existing software.</span></h2>
-        <p class="text-xl text-slate-500 mb-10 max-w-3xl mx-auto font-medium leading-relaxed">Most breakthroughs happen when fields collide with science. We provide the specialized technical expertise your lab needs to bridge the gap between scientific theory and functional tools. If you can imagine the experiment, we can build it for you.</p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#philosophy" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition shadow-2xl">The Outsider Perspective</a>
-            <a href="#contact" class="bg-white border-2 border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition text-slate-900">Get in Touch</a>
+    <header class="relative pt-32 pb-24 px-6 max-w-6xl mx-auto text-center z-10">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-sky-100 bg-sky-50 text-sky-600 text-[10px] font-black uppercase tracking-[0.25em] mb-8">
+            Precision Engineering for Labs
+        </div>
+        
+        <p class="text-lg md:text-2xl text-slate-400 mb-4 font-semibold tracking-tight max-w-2xl mx-auto">
+            Technical implementation shouldn't be a <span class="text-slate-600 italic">bottleneck for scientific progress.</span>
+        </p>
+
+        <h2 class="text-6xl md:text-8xl font-black mb-12 leading-[0.95] tracking-tight text-slate-900">
+            If you can imagine the experiment, <span class="text-sky-500">we can build it for you.</span>
+        </h2>
+
+        <p class="text-xl text-slate-500 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
+            Most breakthroughs happen when disparate fields collide. We provide the specialized technical expertise your lab needs to bridge the gap between scientific theory and functional tools.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <a href="#foundations" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold hover:scale-[1.02] transition shadow-2xl flex items-center justify-center gap-2 group">
+                The Outsider Perspective
+                <span class="group-hover:translate-x-1 transition">→</span>
+            </a>
+            <a href="#contact" class="bg-white border-2 border-slate-100 px-10 py-5 rounded-2xl font-bold hover:bg-slate-50 transition text-slate-900">
+                Contact Technical Lead
+            </a>
         </div>
     </header>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="py-32 px-6 bg-slate-900 text-white overflow-hidden relative">
+    <!-- Foundations Section -->
+    <section id="foundations" class="py-40 px-6 bg-slate-950 text-white relative overflow-hidden">
+        <div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-sky-500/20 blur-[150px] rounded-full"></div>
         <div class="max-w-6xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div>
-                    <h2 class="text-5xl font-black mb-8 tracking-tighter text-sky-400">Deep precision for all disciplines.</h2>
-                    <p class="text-slate-400 text-lg mb-6 leading-relaxed">
-                        Modern research is a mosaic. While our technical foundation is rooted in the high-precision world of <strong>Ultrafast Spectroscopy</strong>, we have built a community that spans all scientific disciplines. 
-                    </p>
-                    <p class="text-slate-400 text-lg mb-6 leading-relaxed">
-                        It is impossible for a lab to house all experts. We act as the professional bridge, combining programming fluency and Embedded Systems engineering with deep domain knowledge to identify solutions that stay hidden from inside the discipline.
-                    </p>
-                    <div class="grid grid-cols-3 gap-6 mt-10">
-                        <div class="border-l-2 border-sky-500 pl-4">
-                            <div class="text-2xl font-bold mb-1">∞</div>
-                            <div class="text-[10px] text-slate-500 uppercase font-black tracking-widest">Any Scale</div>
+            <div class="grid lg:grid-cols-5 gap-16 items-start">
+                <div class="lg:col-span-3">
+                    <h2 class="text-5xl font-black mb-10 tracking-tighter text-sky-400">Deep precision for all disciplines.</h2>
+                    <div class="space-y-6 text-slate-400 text-lg leading-relaxed max-w-2xl">
+                        <p>
+                            Modern research is a mosaic. While our technical foundation is rooted in the high-precision world of <strong>Ultrafast Spectroscopy</strong>, we have built a community that spans many scientific disciplines. 
+                        </p>
+                        <p>
+                            It is impossible for a lab to house all experts. We act as the professional bridge, combining programming fluency and Embedded Systems engineering with deep domain knowledge to identify solutions that stay hidden from inside the discipline.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 border-t border-white/10 pt-16">
+                        <div class="group">
+                            <div class="text-3xl font-light mb-2 text-white">∞</div>
+                            <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Any Scale</div>
                         </div>
-                        <div class="border-l-2 border-sky-500 pl-4">
-                            <div class="text-2xl font-bold mb-1">🤝</div>
-                            <div class="text-[10px] text-slate-500 uppercase font-black tracking-widest">Community</div>
+                        <div class="group">
+                            <div class="text-3xl font-light mb-2 text-white">🤝</div>
+                            <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Community</div>
                         </div>
-                        <div class="border-l-2 border-sky-500 pl-4">
-                            <div class="text-2xl font-bold mb-1">🔒</div>
-                            <div class="text-[10px] text-slate-500 uppercase font-black tracking-widest">Secure IP</div>
+                        <div class="group">
+                            <div class="text-3xl font-light mb-2 text-white">🔒</div>
+                            <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Secure IP</div>
                         </div>
                     </div>
                 </div>
-                <div class="relative">
-                    <div class="bg-gradient-to-br from-sky-400 to-blue-600 p-1 rounded-3xl shadow-2xl rotate-2">
-                        <div class="bg-slate-800 p-10 rounded-[1.4rem] border border-white/5 shadow-inner">
-                            <h3 class="text-2xl font-bold mb-8 text-white tracking-tight">Our Core Commitment</h3>
-                            <div class="space-y-8">
-                                <div class="flex gap-6">
-                                    <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs shrink-0">1</div>
-                                    <p class="text-slate-300 text-sm leading-relaxed"><span class="text-white font-bold block mb-1 uppercase tracking-wider text-xs">Unrestricted Inquiry</span> Your research vision should be limited only by the laws of physics, never by your workstation's software capabilities.</p>
+
+                <div class="lg:col-span-2">
+                    <div class="glass-dark p-12 rounded-[3rem] shadow-3xl">
+                        <h3 class="mono text-xs font-bold mb-10 text-sky-500 uppercase tracking-widest">/Core_Commitments</h3>
+                        <div class="space-y-12">
+                            <div class="flex gap-6">
+                                <span class="mono text-sky-700 font-bold">01</span>
+                                <div>
+                                    <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Unrestricted Inquiry</h4>
+                                    <p class="text-slate-400 text-sm leading-relaxed">Your research vision should be limited only by the laws of physics, never by your workstation's software capabilities.</p>
                                 </div>
-                                <div class="flex gap-6">
-                                    <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs shrink-0">2</div>
-                                    <p class="text-slate-300 text-sm leading-relaxed"><span class="text-white font-bold block mb-1 uppercase tracking-wider text-xs">Integrated Expertise</span> We leverage Python, Embedded Systems, and spectroscopic insight to solve challenges across spectroscopic and if possible in all Life Science fields.</p>
+                            </div>
+                            <div class="flex gap-6">
+                                <span class="mono text-sky-700 font-bold">02</span>
+                                <div>
+                                    <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Integrated Expertise</h4>
+                                    <p class="text-slate-400 text-sm leading-relaxed">We leverage Python, Embedded Systems, and spectroscopic insight to solve challenges across spectroscopic and if possible in all Life Science fields.</p>
                                 </div>
-                                <div class="flex gap-6">
-                                    <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-xs shrink-0">3</div>
-                                    <p class="text-slate-300 text-sm leading-relaxed"><span class="text-white font-bold block mb-1 uppercase tracking-wider text-xs">Absolute Integrity</span> Your scientific ideas and techniques are sacred. We guarantee that no aspect of your proprietary research will ever be revealed.</p>
+                            </div>
+                            <div class="flex gap-6">
+                                <span class="mono text-sky-700 font-bold">03</span>
+                                <div>
+                                    <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Absolute Integrity</h4>
+                                    <p class="text-slate-400 text-sm leading-relaxed">Your scientific ideas and techniques are sacred. We guarantee that no aspect of your proprietary research will ever be revealed.</p>
                                 </div>
                             </div>
                         </div>
@@ -87,89 +138,105 @@
                 </div>
             </div>
         </div>
-        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-sky-600/10 blur-[120px] rounded-full"></div>
     </section>
 
     <!-- Engagement Process -->
-    <section id="how-it-works" class="bg-white py-32 px-6 border-y border-slate-100">
+    <section id="how-it-works" class="py-40 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl font-black mb-4 tracking-tight uppercase">Professional Engagement</h2>
-                <p class="text-slate-400 font-medium">Clear milestones for your custom research tools.</p>
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-6">
+                <div>
+                    <h2 class="text-4xl font-black tracking-tight uppercase">Professional Engagement</h2>
+                    <p class="text-slate-400 font-medium mt-2">Clear milestones for your custom research tools.</p>
+                </div>
+                <div class="h-[2px] flex-grow mx-8 bg-slate-50 hidden md:block mb-3"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="group">
-                    <div class="text-5xl mb-6 opacity-80 group-hover:opacity-100 transition duration-500">📅</div>
-                    <h3 class="text-xl font-bold mb-3">Consultation</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-4">A technical briefing where we evaluate requirements, instrument specifications, and project scope.</p>
-                    <div class="h-1 w-12 bg-slate-100 group-hover:w-full group-hover:bg-sky-500 transition-all duration-500"></div>
+            <div class="grid md:grid-cols-3 gap-16">
+                <div class="relative group">
+                    <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">01</span>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4">Consultation</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">A technical briefing where we evaluate requirements, instrument specifications, and project scope.</p>
+                    </div>
                 </div>
 
-                <div class="group">
-                    <div class="text-5xl mb-6 opacity-80 group-hover:opacity-100 transition duration-500">📝</div>
-                    <h3 class="text-xl font-bold mb-3">Proposal & Quote</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-4">A comprehensive technical proposal including a development timeline and a professional quotation.</p>
-                    <div class="h-1 w-12 bg-slate-100 group-hover:w-full group-hover:bg-sky-500 transition-all duration-500"></div>
+                <div class="relative group">
+                    <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">02</span>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4">Proposal & Quote</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">A comprehensive technical proposal including a development timeline and a professional quotation.</p>
+                    </div>
                 </div>
 
-                <div class="group">
-                    <div class="text-5xl mb-6 opacity-80 group-hover:opacity-100 transition duration-500">🚀</div>
-                    <h3 class="text-xl font-bold mb-3">Implementation</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-4">Custom software is built to spec using robust stacks, tested, and delivered for immediate integration.</p>
-                    <div class="h-1 w-12 bg-slate-100 group-hover:w-full group-hover:bg-sky-500 transition-all duration-500"></div>
+                <div class="relative group">
+                    <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">03</span>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4">Implementation</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">We build the program and provide it to you for rigorous testing with your actual instruments, ensuring complete satisfaction before final delivery.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-32 px-6 bg-slate-50">
+    <section id="contact" class="py-40 px-6 bg-slate-50">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-5xl font-black mb-4 tracking-tighter uppercase text-slate-800">Start a Project</h2>
-            <p class="text-slate-500 font-medium mb-12">Professional evaluation for high-precision scientific tools. Reach out to discuss your requirements.</p>
+            <div class="mb-20">
+                <h2 class="text-5xl font-black mb-6 tracking-tighter uppercase text-slate-800">Start a Project</h2>
+                <p class="text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
+                    Professional evaluation for high-precision scientific tools. Reach out to discuss your requirements.
+                </p>
+            </div>
 
-            <div class="mt-12 inline-flex items-center gap-3 text-[10px] font-black text-sky-700 bg-sky-50 border border-sky-100 px-6 py-3 rounded-full uppercase tracking-[0.2em]">
-                    <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
-                    Strict Confidentiality Guaranteed
+            <div class="bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl shadow-sky-900/5 border border-slate-200/60 relative group">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-3 text-[10px] font-black text-sky-700 bg-white border border-sky-100 px-6 py-3 rounded-full uppercase tracking-[0.2em] shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                    Operational & Accepting Inquiries
                 </div>
-            
-            <div class="bg-white p-12 md:p-20 rounded-[2.5rem] shadow-2xl border border-slate-100 inline-block w-full">
-                <div class="space-y-8">
+
+                <div class="grid gap-16 py-8">
                     <div>
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Direct Email</span>
-                        <a href="mailto:contact@instrumentsresponse.com" class="text-3xl md:text-4xl font-black text-sky-600 hover:text-sky-700 transition break-all">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-4">Secure Channel</span>
+                        <a href="mailto:contact@instrumentsresponse.com" class="text-2xl md:text-5xl font-black text-slate-900 hover:text-sky-600 transition duration-300 underline decoration-sky-100 underline-offset-8 decoration-4 hover:decoration-sky-500 break-all">
                             contact@instrumentsresponse.com
                         </a>
                     </div>
                     
-                    <div class="pt-8 border-t border-slate-50">
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Mailing Address</span>
-                        <p class="text-lg font-bold text-slate-800 leading-relaxed max-w-md mx-auto">
+                    <div class="pt-12 border-t border-slate-50">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-6">Mailing HQ</span>
+                        <div class="mono text-xs font-bold text-slate-800 leading-loose uppercase tracking-widest bg-slate-50 py-10 px-6 rounded-3xl inline-block w-full max-w-md mx-auto">
                             19 Muthunagar, PKM Nagar,<br>
                             Vandiyur, Madurai 625020,<br>
                             India
-                        </p>
+                        </div>
                     </div>
                 </div>
 
-                
+                <p class="mt-12 text-[9px] font-bold text-slate-400 uppercase tracking-[0.4em]">
+                    End-to-End Intellectual Property Protection Guaranteed
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-20 bg-white border-t border-slate-100 text-center">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6">
-             <img src="icon.png" alt="Instrument Response Icon" class="h-8 w-auto grayscale opacity-50" onerror="this.style.display='none'">
-             <div class="space-y-4">
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">© 2026 Instrument Response. Liberating Scientific Imagination.</p>
+    <footer class="py-24 bg-[#0a0a0b] text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-12 relative">
+             <div class="w-full h-px bg-white/5 absolute top-0 left-0"></div>
+             
+             <div class="text-center">
+                 <h2 class="text-lg font-black tracking-tight uppercase mb-2">
+                    <span class="text-sky-500">Instruments</span><span class="text-white">Response</span>
+                </h2>
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.5em]">Liberating Scientific Imagination</p>
              </div>
+
+             <p class="text-[9px] font-bold text-slate-600 uppercase tracking-[0.4em]">
+                © 2026 Instrument Response. Built for the Scientific Community.
+             </p>
         </div>
     </footer>
 
 </body>
 </html>
-
-
-
