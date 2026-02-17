@@ -32,6 +32,22 @@
         /* Custom details styling for the hidden address */
         details summary::-webkit-details-marker { display:none; }
         details summary { list-style: none; }
+
+        .view-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .hidden-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .visible-view {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-[#fcfcfd] text-slate-900 selection:bg-sky-100 selection:text-sky-900">
@@ -42,208 +58,296 @@
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 px-6 py-4 glass-dark">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="group cursor-default">
+            <div class="group cursor-pointer" onclick="showView('home')">
                 <h1 class="text-xl font-extrabold tracking-tighter uppercase">
                     <span class="text-sky-400">Instruments</span><span class="text-white">Response</span>
                 </h1>
             </div>
             <div class="space-x-8 hidden md:flex items-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
-                <a href="#foundations" class="hover:text-sky-400 transition">Foundations</a>
-                <a href="#how-it-works" class="hover:text-sky-400 transition">Process</a>
-                <a href="#contact" class="bg-white text-slate-950 px-6 py-2.5 rounded-full hover:bg-sky-500 hover:text-white transition shadow-lg shadow-sky-500/10 text-[10px]">Get in Touch</a>
+                <a href="javascript:void(0)" onclick="showView('home')" class="hover:text-sky-400 transition nav-link-home">Home</a>
+                <a href="javascript:void(0)" onclick="showView('people')" class="hover:text-sky-400 transition nav-link-people">People</a>
+                <a href="javascript:void(0)" onclick="navigateToContact()" class="bg-white text-slate-950 px-6 py-2.5 rounded-full hover:bg-sky-500 hover:text-white transition shadow-lg shadow-sky-500/10 text-[10px]">Get in Touch</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative pt-32 pb-24 px-6 max-w-6xl mx-auto text-center z-10">
-        <div class="inline-block px-4 py-1.5 rounded-full border border-sky-100 bg-sky-50 text-sky-600 text-[10px] font-black uppercase tracking-[0.25em] mb-8">
-            Precision Engineering for Labs
-        </div>
+    <!-- VIEWS CONTAINER -->
+    <div id="views">
         
-        <p class="text-lg md:text-2xl text-slate-400 mb-4 font-semibold tracking-tight max-w-2xl mx-auto">
-            Technical implementation shouldn't be a bottleneck for scientific progress
-        </p>
-
-        <h2 class="text-6xl md:text-8xl font-black mb-12 leading-[0.95] tracking-tight text-slate-900">
-            If you can imagine the experiment, <span class="text-sky-500">we can build it for you</span>
-        </h2>
-
-        <p class="text-xl text-slate-500 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
-            Most breakthroughs happen when disparate fields collide. We provide the specialized technical expertise your lab needs to bridge the gap between scientific theory and functional tools.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row justify-center gap-6">
-            <a href="#foundations" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold hover:scale-[1.02] transition shadow-2xl flex items-center justify-center gap-2 group">
-                The Outsider Perspective
-                <span class="group-hover:translate-x-1 transition">→</span>
-            </a>
-            <a href="#contact" class="bg-white border-2 border-slate-100 px-10 py-5 rounded-2xl font-bold hover:bg-slate-50 transition text-slate-900">
-                Contact Technical Lead
-            </a>
-        </div>
-    </header>
-
-    <!-- Foundations Section -->
-    <section id="foundations" class="py-40 px-6 bg-slate-950 text-white relative overflow-hidden">
-        <div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-sky-500/20 blur-[150px] rounded-full"></div>
-        <div class="max-w-6xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-5 gap-16 items-start">
-                <div class="lg:col-span-3">
-                    <h2 class="text-5xl font-black mb-10 tracking-tighter text-sky-400">Deep precision for all disciplines</h2>
-                    <div class="space-y-6 text-slate-400 text-lg leading-relaxed max-w-2xl">
-                        <p>
-                            Modern research is a mosaic. While our technical foundation is rooted in the high-precision world of Spectroscopy, Programming and Engineering, we have built a community that spans many more scientific disciplines. 
-                        </p>
-                        <p>
-                            It is impossible for a lab to house all experts. We act as the professional bridge, combining programming fluency and Embedded Systems engineering with deep domain knowledge to identify solutions that stay hidden from inside the discipline.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 border-t border-white/10 pt-16">
-                        <div class="group">
-                            <div class="text-3xl font-light mb-2 text-white">∞</div>
-                            <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Any Scale</div>
-                        </div>
-                        <div class="group">
-                            <div class="text-3xl font-light mb-2 text-white">🤝</div>
-                            <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Community</div>
-                        </div>
-                        <div class="group">
-                            <div class="text-3xl font-light mb-2 text-white">🔒</div>
-                            <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Secure IP</div>
-                        </div>
-                    </div>
+        <!-- HOME VIEW -->
+        <main id="view-home" class="view-transition visible-view">
+            <!-- Hero Section -->
+            <header class="relative pt-32 pb-24 px-6 max-w-6xl mx-auto text-center z-10">
+                <div class="inline-block px-4 py-1.5 rounded-full border border-sky-100 bg-sky-50 text-sky-600 text-[10px] font-black uppercase tracking-[0.25em] mb-8">
+                    Precision Engineering for Labs
                 </div>
-
-                <div class="lg:col-span-2">
-                    <div class="glass-dark p-12 rounded-[3rem] shadow-3xl bg-slate-900/40">
-                        <h3 class="mono text-xs font-bold mb-10 text-sky-500 uppercase tracking-widest">/Core_Commitments</h3>
-                        <div class="space-y-12">
-                            <div class="flex gap-6">
-                                <span class="mono text-sky-700 font-bold">01</span>
-                                <div>
-                                    <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Unrestricted Inquiry</h4>
-                                    <p class="text-slate-400 text-sm leading-relaxed">Your research vision should be limited only by the laws of physics, never by your workstation's software capabilities.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-6">
-                                <span class="mono text-sky-700 font-bold">02</span>
-                                <div>
-                                    <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Integrated Expertise</h4>
-                                    <p class="text-slate-400 text-sm leading-relaxed">We combine expertise in programming, embedded systems, and research to address complex challenges across the life sciences.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-6">
-                                <span class="mono text-sky-700 font-bold">03</span>
-                                <div>
-                                    <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Absolute Integrity</h4>
-                                    <p class="text-slate-400 text-sm leading-relaxed">Your scientific ideas and techniques are sacred. We guarantee that no aspect of your proprietary research will ever be revealed.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Engagement Process -->
-    <section id="how-it-works" class="py-40 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-6">
-                <div>
-                    <h2 class="text-4xl font-black tracking-tight uppercase text-slate-900">Professional Engagement</h2>
-                    <p class="text-slate-400 font-medium mt-2">Clear milestones for your custom research tools.</p>
-                </div>
-                <div class="h-[2px] flex-grow mx-8 bg-slate-50 hidden md:block mb-3"></div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-16">
-                <div class="relative group">
-                    <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">01</span>
-                    <div class="relative z-10">
-                        <h3 class="text-xl font-bold mb-4">Consultation</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">A technical briefing where we evaluate requirements, instrument specifications, and project scope.</p>
-                    </div>
-                </div>
-
-                <div class="relative group">
-                    <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">02</span>
-                    <div class="relative z-10">
-                        <h3 class="text-xl font-bold mb-4">Proposal & Quote</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">A comprehensive technical proposal including a development timeline and a professional quotation.</p>
-                    </div>
-                </div>
-
-                <div class="relative group">
-                    <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">03</span>
-                    <div class="relative z-10">
-                        <h3 class="text-xl font-bold mb-4">Implementation</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed">We build the program and provide it to you for rigorous testing with your actual instruments, ensuring complete satisfaction before final delivery.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-40 px-6 bg-slate-50">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="mb-20">
-                <h2 class="text-5xl font-black mb-6 tracking-tighter uppercase text-slate-800">Start a Project</h2>
-                <p class="text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
-                    Professional evaluation for high-precision scientific tools. Reach out to discuss your requirements.
+                
+                <p class="text-lg md:text-2xl text-slate-400 mb-4 font-semibold tracking-tight max-w-2xl mx-auto">
+                    Technical implementation shouldn't be a bottleneck for scientific progress
                 </p>
-            </div>
 
-            <div class="bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl shadow-sky-900/5 border border-slate-200/60 relative">
-                <!-- Status Badge -->
-                <div class="absolute -top-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-3 text-[10px] font-black text-sky-700 bg-white border border-sky-100 px-6 py-3 rounded-full uppercase tracking-[0.2em] shadow-lg">
-                    <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
-                    Operational & Accepting Inquiries
+                <h2 class="text-6xl md:text-8xl font-black mb-12 leading-[0.95] tracking-tight text-slate-900">
+                    If you can imagine the experiment, <span class="text-sky-500">we can build it for you</span>
+                </h2>
+
+                <p class="text-xl text-slate-500 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
+                    Most breakthroughs happen when disparate fields collide. We provide the specialized technical expertise your lab needs to bridge the gap between scientific theory and functional tools.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="#foundations" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold hover:scale-[1.02] transition shadow-2xl flex items-center justify-center gap-2 group">
+                        The Outsider Perspective
+                        <span class="group-hover:translate-x-1 transition">→</span>
+                    </a>
+                    <a href="javascript:void(0)" onclick="navigateToContact()" class="bg-white border-2 border-slate-100 px-10 py-5 rounded-2xl font-bold hover:bg-slate-50 transition text-slate-900 text-center">
+                        Contact Technical Lead
+                    </a>
                 </div>
+            </header>
 
-                <div class="py-8">
-                    <!-- Secure Channel -->
-                    <div class="mb-16">
-                        <p class="text-sm md:text-base font-medium text-slate-600 mb-6 max-w-xl mx-auto leading-relaxed">
-                        Our door is always open. Whether you’re ready to start a project, have a quick technical question, or just want to say hello, feel free to reach out anytime. 
-                       <span class="text-sky-500 font-semibold block mt-1">We won't bite you for asking.</span>
-                          </p>
-    
-                        <a href="mailto:contact@instrumentsresponse.com" class="text-xl md:text-4xl font-black text-slate-900 hover:text-sky-600 transition duration-300 underline decoration-sky-100 underline-offset-8 decoration-4 hover:decoration-sky-500 break-all">
-                        contact@instrumentsresponse.com
-                        </a>
-                    </div>
-                    
-                    <!-- Hidden/Tucked Address Section -->
-                    <div class="pt-8 border-t border-slate-50">
-                        <details class="group">
-                            <summary class="cursor-pointer flex flex-col items-center gap-2 group">
-                                <span class="text-[10px] font-black text-slate-400 group-hover:text-sky-500 uppercase tracking-[0.3em] transition">Business Details</span>
-                                <div class="w-6 h-6 rounded-full border border-slate-100 flex items-center justify-center group-hover:bg-sky-50 transition group-open:rotate-180">
-                                    <svg class="w-3 h-3 text-slate-400 group-hover:text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+            <!-- Foundations Section -->
+            <section id="foundations" class="py-40 px-6 bg-slate-950 text-white relative overflow-hidden">
+                <div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-sky-500/20 blur-[150px] rounded-full"></div>
+                <div class="max-w-6xl mx-auto relative z-10">
+                    <div class="grid lg:grid-cols-5 gap-16 items-start">
+                        <div class="lg:col-span-3">
+                            <h2 class="text-5xl font-black mb-10 tracking-tighter text-sky-400">Deep precision for all disciplines</h2>
+                            <div class="space-y-6 text-slate-400 text-lg leading-relaxed max-w-2xl">
+                                <p>
+                                    Modern research is a mosaic. While our technical foundation is rooted in the high-precision world of Spectroscopy, Programming and Engineering, we have built a community that spans many more scientific disciplines. 
+                                </p>
+                                <p>
+                                    It is impossible for a lab to house all experts. We act as the professional bridge, combining programming fluency and Embedded Systems engineering with deep domain knowledge to identify solutions that stay hidden from inside the discipline.
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 border-t border-white/10 pt-16">
+                                <div class="group">
+                                    <div class="text-3xl font-light mb-2 text-white">∞</div>
+                                    <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Any Scale</div>
                                 </div>
-                            </summary>
-                            
-                            <div class="mt-8 animate-in fade-in slide-in-from-top-2 duration-300">
-                                <div class="mono text-[11px] font-bold text-slate-500 leading-loose uppercase tracking-[0.2em] bg-slate-50 py-8 px-6 rounded-3xl inline-block w-full max-w-sm mx-auto border border-slate-100">
-                                    Muthunagar 19, PKM Nagar,<br>
-                                    Vandiyur, Madurai 625020,<br>
-                                    India
+                                <div class="group">
+                                    <div class="text-3xl font-light mb-2 text-white">🤝</div>
+                                    <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Community</div>
+                                </div>
+                                <div class="group">
+                                    <div class="text-3xl font-light mb-2 text-white">🔒</div>
+                                    <div class="text-[10px] text-sky-500 uppercase font-black tracking-widest group-hover:translate-x-1 transition">Secure IP</div>
                                 </div>
                             </div>
-                        </details>
+                        </div>
+
+                        <div class="lg:col-span-2">
+                            <div class="glass-dark p-12 rounded-[3rem] shadow-3xl bg-slate-900/40">
+                                <h3 class="mono text-xs font-bold mb-10 text-sky-500 uppercase tracking-widest">/Core_Commitments</h3>
+                                <div class="space-y-12">
+                                    <div class="flex gap-6">
+                                        <span class="mono text-sky-700 font-bold">01</span>
+                                        <div>
+                                            <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Unrestricted Inquiry</h4>
+                                            <p class="text-slate-400 text-sm leading-relaxed">Your research vision should be limited only by the laws of physics, never by your workstation's software capabilities.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-6">
+                                        <span class="mono text-sky-700 font-bold">02</span>
+                                        <div>
+                                            <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Integrated Expertise</h4>
+                                            <p class="text-slate-400 text-sm leading-relaxed">We combine expertise in programming, embedded systems, and research to address complex challenges across the life sciences.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-6">
+                                        <span class="mono text-sky-700 font-bold">03</span>
+                                        <div>
+                                            <h4 class="text-sm font-bold uppercase tracking-wider mb-2">Absolute Integrity</h4>
+                                            <p class="text-slate-400 text-sm leading-relaxed">Your scientific ideas and techniques are sacred. We guarantee that no aspect of your proprietary research will ever be revealed.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Engagement Process -->
+            <section id="how-it-works" class="py-40 px-6 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-6">
+                        <div>
+                            <h2 class="text-4xl font-black tracking-tight uppercase text-slate-900">Professional Engagement</h2>
+                            <p class="text-slate-400 font-medium mt-2">Clear milestones for your custom research tools.</p>
+                        </div>
+                        <div class="h-[2px] flex-grow mx-8 bg-slate-50 hidden md:block mb-3"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-16">
+                        <div class="relative group">
+                            <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">01</span>
+                            <div class="relative z-10">
+                                <h3 class="text-xl font-bold mb-4">Consultation</h3>
+                                <p class="text-slate-500 text-sm leading-relaxed">A technical briefing where we evaluate requirements, instrument specifications, and project scope.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">02</span>
+                            <div class="relative z-10">
+                                <h3 class="text-xl font-bold mb-4">Proposal & Quote</h3>
+                                <p class="text-slate-500 text-sm leading-relaxed">A comprehensive technical proposal including a development timeline and a professional quotation.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <span class="absolute -top-10 left-0 mono text-5xl font-black text-slate-50 transition group-hover:text-sky-50">03</span>
+                            <div class="relative z-10">
+                                <h3 class="text-xl font-bold mb-4">Implementation</h3>
+                                <p class="text-slate-500 text-sm leading-relaxed">We build the program and provide it to you for rigorous testing with your actual instruments, ensuring complete satisfaction before final delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-40 px-6 bg-slate-50">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="mb-20">
+                        <h2 class="text-5xl font-black mb-6 tracking-tighter uppercase text-slate-800">Start a Project</h2>
+                        <p class="text-slate-500 font-medium max-w-xl mx-auto leading-relaxed">
+                            Professional evaluation for high-precision scientific tools. Reach out to discuss your requirements.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-8 md:p-16 rounded-[4rem] shadow-2xl shadow-sky-900/5 border border-slate-200/60 relative">
+                        <!-- Status Badge -->
+                        <div class="absolute -top-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-3 text-[10px] font-black text-sky-700 bg-white border border-sky-100 px-6 py-3 rounded-full uppercase tracking-[0.2em] shadow-lg">
+                            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                            Operational & Accepting Inquiries
+                        </div>
+
+                        <div class="py-8">
+                            <!-- Secure Channel -->
+                            <div class="mb-16">
+                                <p class="text-sm md:text-base font-medium text-slate-600 mb-6 max-w-xl mx-auto leading-relaxed">
+                                Our door is always open. Whether you’re ready to start a project, have a quick technical question, or just want to say hello, feel free to reach out anytime. 
+                               <span class="text-sky-500 font-semibold block mt-1">We won't bite you for asking.</span>
+                                  </p>
+            
+                                <a href="mailto:contact@instrumentsresponse.com" class="text-xl md:text-4xl font-black text-slate-900 hover:text-sky-600 transition duration-300 underline decoration-sky-100 underline-offset-8 decoration-4 hover:decoration-sky-500 break-all">
+                                contact@instrumentsresponse.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <p class="mt-12 text-[9px] font-bold text-slate-400 uppercase tracking-[0.4em]">
+                            End-to-End Intellectual Property Protection Guaranteed
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- PEOPLE VIEW -->
+        <main id="view-people" class="view-transition hidden-view min-h-[80vh]">
+            <section class="pt-32 pb-24 px-6 max-w-6xl mx-auto">
+                <div class="inline-block px-4 py-1.5 rounded-full border border-sky-100 bg-sky-50 text-sky-600 text-[10px] font-black uppercase tracking-[0.25em] mb-8">
+                    The Technical Lead
+                </div>
+                <h2 class="text-5xl md:text-7xl font-black mb-12 leading-[0.95] tracking-tight text-slate-900">
+                    Engineered with <span class="text-sky-500">Precision</span>
+                </h2>
+                <p class="text-xl text-slate-500 mb-16 max-w-3xl font-medium leading-relaxed">
+                    Our foundation is built on deep electrical expertise and a passion for automation.
+                </p>
+
+                <div class="grid grid-cols-1 gap-12 max-w-3xl">
+                    <!-- Updated Person Bio -->           
+                    <div class="p-10 md:p-16 rounded-[4rem] bg-white border border-slate-100 shadow-2xl shadow-slate-200/50 group hover:border-sky-200 transition">
+                        <div class="mono text-sky-500 font-bold text-xs uppercase tracking-widest mb-4">Technical Lead</div>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Santhosh RR</h3>
+                        
+                        <div class="space-y-6 text-slate-500 leading-relaxed text-base md:text-lg">
+                            <p>
+                                Pursuing my degree in Electrical and Electronics Engineering with a minor specialization in Robotics and Automation. Focused on the intersection of hardware and software interfacing, particularly within complex control applications.
+                            </p>
+                            <p>
+                                Building a robust technical foundation in C programming and microcontroller fundamentals. Specialized expertise includes basic motor control, serial communication protocols, and integrated embedded system design for high-precision instrumentation environments.
+                            </p>
+                        </div>
+
+                        <div class="mt-10 flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Embedded Systems</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Robotics & Automation</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">C Programming</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Microcontrollers</span>
+                        </div>
+			</div>	
+<div class="p-10 md:p-16 rounded-[4rem] bg-white border border-slate-100 shadow-2xl shadow-slate-200/50 group hover:border-sky-200 transition">
+                        <div class="mono text-sky-500 font-bold text-xs uppercase tracking-widest mb-4">Scientific Advisor</div>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Mathesh Vaithiyanathan</h3>
+                        
+                        <div class="space-y-6 text-slate-500 leading-relaxed text-base md:text-lg">
+                            <p>
+                                Conducting doctoral research in Berlin, Germany, with a specialized focus on Ultrafast Spectroscopy and Nonlinear Optics. My work sits at the cutting edge of light-matter interaction and time-resolved molecular dynamics. I try to act as the bridge between raw experimental data and scientific insight.                             </p>
+                        </div>
+
+                        <div class="mt-10 flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Ultrafast Spectroscopy</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Nonlinear Optics</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Python</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Data Analysis</span>
+                        </div>
+                    </div> 
+
+<div class="p-10 md:p-16 rounded-[4rem] bg-white border border-slate-100 shadow-2xl shadow-slate-200/50 group hover:border-sky-200 transition">
+                        <div class="mono text-sky-500 font-bold text-xs uppercase tracking-widest mb-4">Scientific Advisor</div>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Dr. Sivatharani Boomiraja</h3>
+                        
+                        <div class="space-y-6 text-slate-500 leading-relaxed text-base md:text-lg">
+                            <p>
+                                I'm an Assistant Professor at Velammal Engineering College, India, where I specialize in bridging the gap between scientific theory and engineering practice. Drawing on my PhD in Physics and research in nonlinear dynamics and quantum systems, I am dedicated to teaching and mentoring engineering students and fostering a rigorous understanding of both fundamental and applied physics.
+                            </p>
+                        </div>
+
+                        <div class="mt-10 flex flex-wrap gap-3">
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Teaching</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Nonlinear dynamics</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Quantum systems</span>
+                            <span class="px-4 py-1.5 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">Applied physics</span>
+                        </div>
+                    </div>
+                       
+
+                        <!-- Business Details -->
+                        <div class="pt-12 mt-12 border-t border-slate-100">
+                            <details class="group">
+                                <summary class="cursor-pointer flex flex-col items-center gap-2 group">
+                                    <span class="text-[10px] font-black text-slate-400 group-hover:text-sky-500 uppercase tracking-[0.3em] transition">Business Details</span>
+                                    <div class="w-6 h-6 rounded-full border border-slate-100 flex items-center justify-center group-hover:bg-sky-50 transition group-open:rotate-180">
+                                        <svg class="w-3 h-3 text-slate-400 group-hover:text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                                    </div>
+                                </summary>
+                                
+                                <div class="mt-8 animate-in fade-in slide-in-from-top-2 duration-300">
+                                    <div class="mono text-[11px] font-bold text-slate-500 leading-loose uppercase tracking-[0.2em] bg-slate-50 py-8 px-6 rounded-3xl inline-block w-full text-center border border-slate-100">
+                                        Muthunagar 19, PKM Nagar,<br>
+                                        Vandiyur, Madurai 625020,<br>
+                                        India
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
                     </div>
                 </div>
 
-                <p class="mt-12 text-[9px] font-bold text-slate-400 uppercase tracking-[0.4em]">
-                    End-to-End Intellectual Property Protection Guaranteed
-                </p>
-            </div>
-        </div>
-    </section>
+                <div class="mt-20 text-left">
+                    <button onclick="showView('home')" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold hover:scale-[1.02] transition shadow-2xl flex items-center justify-center gap-2">
+                        Back to Overview
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <!-- Footer -->
     <footer class="py-24 bg-[#0a0a0b] text-white overflow-hidden">
@@ -257,19 +361,61 @@
                 <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.5em]">Liberating Scientific Imagination</p>
              </div>
 
+             <div class="flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <a href="javascript:void(0)" onclick="showView('home')" class="hover:text-white transition">Home</a>
+                <a href="javascript:void(0)" onclick="showView('people')" class="hover:text-sky-400 transition">People</a>
+                <a href="javascript:void(0)" onclick="navigateToContact()" class="hover:text-white transition">Contact</a>
+             </div>
+
              <p class="text-[9px] font-bold text-slate-600 uppercase tracking-[0.4em]">
-                © 2026 Instrument Response. Built for the Scientific Community.
+                 © 2026 Instrument Response. Built for the Scientific Community.
              </p>
         </div>
     </footer>
 
+    <script>
+        function showView(viewId) {
+            const homeView = document.getElementById('view-home');
+            const peopleView = document.getElementById('view-people');
+            
+            // Hide all first
+            homeView.classList.add('hidden-view');
+            homeView.classList.remove('visible-view');
+            peopleView.classList.add('hidden-view');
+            peopleView.classList.remove('visible-view');
+
+            // Show target
+            const target = document.getElementById('view-' + viewId);
+            target.classList.remove('hidden-view');
+            setTimeout(() => {
+                target.classList.add('visible-view');
+            }, 50);
+
+            // Update nav visibility
+            const homeOnlyElements = document.querySelectorAll('.home-only');
+            if (viewId === 'people') {
+                homeOnlyElements.forEach(el => el.classList.add('hidden'));
+            } else {
+                homeOnlyElements.forEach(el => el.classList.remove('hidden'));
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToContact() {
+            // First, make sure we are on the home view
+            showView('home');
+            
+            // Wait slightly for the view transition to complete before scrolling
+            setTimeout(() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 350);
+        }
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
